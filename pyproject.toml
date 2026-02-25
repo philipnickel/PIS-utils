@@ -1,6 +1,6 @@
 [project]
 name = "pis-utils"
-version = "0.1.3"
+version = "0.1.4"
 description = "CLI for installing VS Code and Miniforge3 at DTU"
 readme = "README.md"
 requires-python = ">=3.12"
