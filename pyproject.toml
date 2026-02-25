@@ -1,7 +1,7 @@
 [project]
 name = "pis-utils"
 version = "0.1.1"
-description = "Cross-platform Python installation support scripts for DTU"
+description = "CLI for installing VS Code and Miniforge3 at DTU"
 readme = "README.md"
 requires-python = ">=3.12"
 license = "MIT"

@@ -20,7 +20,7 @@ def test_get_installer_url_windows():
         url, filename = get_installer_url()
         assert (
             url
-            == "https://github.com/philipnickel/miniforge/releases/download/latest/Miniforge3-Windows-x86_64.exe"
+            == "https://github.com/philipnickel/miniforge/releases/latest/download/Miniforge3-Windows-x86_64.exe"
         )
         assert filename == "Miniforge3-Windows-x86_64.exe"
 
@@ -37,7 +37,7 @@ def test_get_installer_url_macos_intel():
         url, filename = get_installer_url()
         assert (
             url
-            == "https://github.com/philipnickel/miniforge/releases/download/latest/Miniforge3-Darwin-x86_64.sh"
+            == "https://github.com/philipnickel/miniforge/releases/latest/download/Miniforge3-Darwin-x86_64.sh"
         )
         assert filename == "Miniforge3-Darwin-x86_64.sh"
 
@@ -54,7 +54,7 @@ def test_get_installer_url_macos_arm():
         url, filename = get_installer_url()
         assert (
             url
-            == "https://github.com/philipnickel/miniforge/releases/download/latest/Miniforge3-Darwin-arm64.sh"
+            == "https://github.com/philipnickel/miniforge/releases/latest/download/Miniforge3-Darwin-arm64.sh"
         )
         assert filename == "Miniforge3-Darwin-arm64.sh"
 
@@ -71,7 +71,7 @@ def test_get_installer_url_linux_x86():
         url, filename = get_installer_url()
         assert (
             url
-            == "https://github.com/philipnickel/miniforge/releases/download/latest/Miniforge3-Linux-x86_64.sh"
+            == "https://github.com/philipnickel/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh"
         )
         assert filename == "Miniforge3-Linux-x86_64.sh"
 
@@ -88,7 +88,7 @@ def test_get_installer_url_linux_arm():
         url, filename = get_installer_url()
         assert (
             url
-            == "https://github.com/philipnickel/miniforge/releases/download/latest/Miniforge3-Linux-aarch64.sh"
+            == "https://github.com/philipnickel/miniforge/releases/latest/download/Miniforge3-Linux-aarch64.sh"
         )
         assert filename == "Miniforge3-Linux-aarch64.sh"
 

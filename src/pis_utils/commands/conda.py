@@ -32,8 +32,14 @@ def get_installer_url(dev: bool = False) -> tuple[str, str]:
     Returns:
         Tuple of (download_url, filename)
     """
-    release = config["miniforge_dev"] if dev else config["miniforge_latest_release"]
-    base_url = f"https://github.com/{config['miniforge_github_repo']}/releases/download/{release}"
+    repo = config["miniforge_github_repo"]
+    if dev:
+        base_url = (
+            f"https://github.com/{repo}/releases/download/{config['miniforge_dev']}"
+        )
+    else:
+        # GitHub's /releases/latest/download/ resolves to the newest release
+        base_url = f"https://github.com/{repo}/releases/latest/download"
 
     if get_os() == OperatingSystem.WINDOWS:
         filename = "Miniforge3-Windows-x86_64.exe"

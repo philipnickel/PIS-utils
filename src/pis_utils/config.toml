@@ -6,9 +6,6 @@
 # GitHub repository for Miniforge installers
 miniforge_github_repo = "philipnickel/miniforge"
 
-# Tag for latest stable Miniforge release
-miniforge_latest_release = "latest"
-
 # Tag for Miniforge development builds
 miniforge_dev = "dev"
 
