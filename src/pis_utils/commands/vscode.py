@@ -15,7 +15,6 @@ import typer
 
 from pis_utils.config import config
 from pis_utils.core import (
-    Architecture,
     OperatingSystem,
     console,
     download_file,
@@ -103,24 +102,15 @@ def get_download_url() -> tuple[str, str]:
         OSError: If the platform is unsupported
     """
     os_type = get_os()
-    arch = get_architecture()
+    base = config["vscode_download_base_url"]
+    channel = config["vscode_stable_channel"]
 
     if os_type == OperatingSystem.WINDOWS:
-        return (
-            f"{config['vscode_download_base_url']}/latest/win32-x64-user/{config['vscode_stable_channel']}",
-            "vscode_installer.exe",
-        )
+        return (f"{base}/latest/win32-x64-user/{channel}", "vscode_installer.exe")
     elif os_type == OperatingSystem.MACOS:
-        arch_str = "arm64" if arch == Architecture.ARM64 else "x64"
-        return (
-            f"{config['vscode_download_base_url']}/latest/darwin-{arch_str}/{config['vscode_stable_channel']}",
-            "VSCode.zip",
-        )
+        return (f"{base}/latest/darwin-universal/{channel}", "VSCode.zip")
     else:  # Linux
-        return (
-            f"{config['vscode_download_base_url']}/latest/linux-x64/{config['vscode_stable_channel']}",
-            "vscode.tar.gz",
-        )
+        return (f"{base}/latest/linux-x64/{channel}", "vscode.tar.gz")
 
 
 # ── Installation ──────────────────────────────────────────────────────────────

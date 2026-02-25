@@ -18,17 +18,10 @@ def test_get_download_url_windows(mock_platform_windows):
     assert filename == "vscode_installer.exe"
 
 
-def test_get_download_url_macos_intel(mock_platform_macos_intel):
-    """Test download URL generation for macOS Intel."""
+def test_get_download_url_macos(mock_platform_macos_arm):
+    """Test download URL generation for macOS (universal binary)."""
     url, filename = get_download_url()
-    assert "darwin-x64" in url
-    assert filename == "VSCode.zip"
-
-
-def test_get_download_url_macos_arm(mock_platform_macos_arm):
-    """Test download URL generation for macOS ARM."""
-    url, filename = get_download_url()
-    assert "darwin-arm64" in url
+    assert "darwin-universal" in url
     assert filename == "VSCode.zip"
 
 
