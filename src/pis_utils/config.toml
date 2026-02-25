@@ -1,0 +1,48 @@
+# pis-utils Configuration
+# Single source of truth for all package configuration
+
+# ── Miniforge/Conda Configuration ────────────────────────────────────────────
+
+# GitHub repository for Miniforge installers
+miniforge_github_repo = "philipnickel/miniforge"
+
+# Tag for latest stable Miniforge release
+miniforge_latest_release = "latest"
+
+# Tag for Miniforge development builds
+miniforge_dev = "dev"
+
+
+# ── VS Code Configuration ─────────────────────────────────────────────────────
+
+# Base URL for VS Code downloads
+vscode_download_base_url = "https://update.code.visualstudio.com"
+
+# Release channel (stable, insider)
+vscode_stable_channel = "stable"
+
+# Extensions to install
+# Find extension IDs at: https://marketplace.visualstudio.com/vscode
+vscode_extensions = [
+    "ms-python.python",           # Python language support
+    "ms-toolsai.jupyter",         # Jupyter notebook support
+]
+
+# ── Network Configuration ─────────────────────────────────────────────────────
+
+# Default timeout for network operations in seconds
+network_timeout_seconds = 120
+
+
+# ── VS Code Settings ──────────────────────────────────────────────────────────
+
+# VS Code settings to apply (merged with existing settings)
+[vscode_settings]
+# === AI Features Disabled ===
+# VS Code 1.104+ has a single setting to disable all AI features
+"chat.disableAIFeatures" = true
+
+# === Python Environments Extension ===
+# The Python extension auto-installs the Python Environments extension.
+# Disable it to prevent the new environment management UI from appearing.
+"python.useEnvironmentsExtension" = false
