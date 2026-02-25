@@ -8,7 +8,6 @@ import sys
 import tarfile
 import tempfile
 import tomllib
-import zipfile
 from pathlib import Path
 
 import typer
@@ -134,11 +133,10 @@ def install_vscode_macos(installer: Path) -> None:
     extract_dir = installer.parent / "vscode_extracted"
     extract_dir.mkdir(exist_ok=True)
 
-    with (
-        console.status("  Extracting VS Code for macOS…"),
-        zipfile.ZipFile(installer) as zf,
-    ):
-        zf.extractall(extract_dir)
+    with console.status("  Extracting VS Code for macOS…"):
+        subprocess.run(
+            ["unzip", "-q", str(installer), "-d", str(extract_dir)], check=True
+        )
 
     app_src = extract_dir / "Visual Studio Code.app"
     app_dst = Path("/Applications/Visual Studio Code.app")
@@ -217,6 +215,8 @@ def find_code_cli() -> str:
 
     os_type = get_os()
 
+    # Fallback to known install locations
+    candidates: list[Path] = []
     if os_type == OperatingSystem.WINDOWS:
         candidates = [
             Path(os.environ.get("LOCALAPPDATA", ""))
@@ -229,14 +229,23 @@ def find_code_cli() -> str:
             / "bin"
             / "code.cmd",
         ]
-        for c in candidates:
-            if c.exists():
-                return str(c)
+    elif os_type == OperatingSystem.MACOS:
+        candidates = [
+            Path(
+                "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code"
+            ),
+        ]
+    else:  # Linux
+        candidates = [
+            Path.home() / ".local" / "bin" / "code",
+        ]
+
+    for c in candidates:
+        if c.exists():
+            return str(c)
 
     raise FileNotFoundError(
-        "Could not find the `code` CLI. "
-        "On Windows, try opening a new terminal after installation. "
-        "On Linux, make sure ~/.local/bin is in your PATH."
+        "Could not find the `code` CLI. Try restarting your terminal."
     )
 
 
