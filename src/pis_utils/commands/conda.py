@@ -52,11 +52,14 @@ def get_installer_url(dev: bool = False) -> tuple[str, str]:
 
 def get_conda_base_prefix() -> Path | None:
     """
-    Get conda base installation directory by running 'conda info --base'.
+    Get conda base installation directory.
+
+    Tries 'conda info --base' first, then checks common install locations.
 
     Returns:
-        Path to conda base directory, or None if conda not found
+        Path to conda base directory, or None if not found
     """
+    # Try conda command first
     try:
         result = subprocess.run(
             ["conda", "info", "--base"],
@@ -69,8 +72,18 @@ def get_conda_base_prefix() -> Path | None:
             if base_path.exists():
                 return base_path
     except FileNotFoundError:
-        # conda command not found
         pass
+
+    # Fallback: check common install locations
+    candidates = [
+        Path.home() / "miniforge3",
+        Path.home() / "miniconda3",
+        Path.home() / "anaconda3",
+    ]
+    for candidate in candidates:
+        if candidate.exists():
+            return candidate
+
     return None
 
 
