@@ -174,28 +174,17 @@ def install(
             installer = Path(tmpdir) / filename
             download_file(url, installer)
 
-            # Run installer
+            # Run installer (output shown directly)
+            console.print("  Running installer…\n")
             if os_type == OperatingSystem.WINDOWS:
-                with console.status("  Running installer…"):
-                    result = subprocess.run(
-                        [str(installer), "/S"],
-                        capture_output=True,
-                        text=True,
-                    )
+                result = subprocess.run([str(installer), "/S"])
             else:
-                with console.status("  Running installer…"):
-                    result = subprocess.run(
-                        ["bash", str(installer), "-buc"],
-                        capture_output=True,
-                        text=True,
-                    )
+                result = subprocess.run(["bash", str(installer), "-buc"])
 
             if result.returncode == 0:
-                console.print("  [green]✓[/green] Installation complete")
+                console.print("\n  [green]✓[/green] Installation complete")
             else:
-                console.print("  [red]✗[/red] Installation failed")
-                if result.stderr:
-                    console.print(f"  [dim]{result.stderr}[/dim]")
+                console.print("\n  [red]✗[/red] Installation failed")
                 sys.exit(1)
 
         console.print(
